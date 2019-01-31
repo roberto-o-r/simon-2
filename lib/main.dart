@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
           child: Text(
             'Simon 2',
             style: TextStyle(
-                color: Colors.white, fontFamily: 'Quantify', fontSize: 40),
+                color: Colors.white, fontFamily: 'Quantify', fontSize: 45),
           ),
         ),
         backgroundColor: Colors.black,
