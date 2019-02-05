@@ -1,35 +1,61 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(LogoApp());
 
-class MyApp extends StatelessWidget {
-  @override
+class AnimatedLogo extends AnimatedWidget {
+  AnimatedLogo({Key key, Animation<double> animation})
+      : super(key: key, listenable: animation);
+
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      theme: new ThemeData(primaryColor: Colors.black, fontFamily: 'Quantify'),
-      home: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Center(
-              child: AnimatedContainer(
-                width: 200,
-                height: 200,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-                duration: Duration(seconds: 1),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Simon 2',
-                style: TextStyle(
-                    color: Colors.white, fontFamily: 'Quantify', fontSize: 45),
-              ),
-            ),
-          ],
-        ),
+    final Animation<double> animation = listenable;
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        height: animation.value,
+        width: animation.value,
+        child: FlutterLogo(),
       ),
     );
   }
+}
+
+class LogoApp extends StatefulWidget {
+  _LogoAppState createState() => _LogoAppState();
+}
+
+// #docregion print-state
+class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
+  Animation<double> animation;
+  AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    animation = Tween<double>(begin: 150, end: 300).animate(controller)
+      // #enddocregion print-state
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          controller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controller.forward();
+        }
+      })
+      // #docregion print-state
+      ..addStatusListener((state) => print('$state'));
+    controller.forward();
+  }
+  // #enddocregion print-state
+
+  @override
+  Widget build(BuildContext context) => AnimatedLogo(animation: animation);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+  // #docregion print-state
 }
