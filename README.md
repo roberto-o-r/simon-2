@@ -1,6 +1,6 @@
 # simon_2
 
-A new Flutter project.
+Simon 2 game in Flutter for Android and iOS.
 
 ## Getting Started
 
