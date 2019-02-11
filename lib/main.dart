@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:simon_2/motionCircle.dart';
+import 'package:simon_2/animated_circle.dart';
 
 void main() => runApp(SimonApp());
 
@@ -30,7 +30,7 @@ class _SimonAppState extends State<SimonApp>
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedLogo(animation: animation);
+  Widget build(BuildContext context) => AnimatedCircle(animation: animation);
 
   @override
   void dispose() {
