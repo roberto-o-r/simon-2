@@ -7,5 +7,10 @@ class Simon2App extends StatefulWidget {
 
 class _SimonAppState extends State<Simon2App> {
   @override
-  Widget build(BuildContext context) => HomeScreen();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'Quantify'),
+      home: HomeScreen(),
+    );
+  }
 }
