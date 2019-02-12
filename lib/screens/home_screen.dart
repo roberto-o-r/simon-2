@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
     controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<double>(begin: 150, end: 300).animate(controller)
+    animation = Tween<double>(begin: 150, end: 160).animate(controller)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
@@ -27,7 +27,25 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedCircle(animation: animation);
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: <Widget>[
+          Center(child: AnimatedCircle(animation: this.animation)),
+          Center(
+            child: Text(
+              "Simon 2",
+              style: TextStyle(
+                fontSize: 40,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   void dispose() {

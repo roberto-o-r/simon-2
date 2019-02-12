@@ -7,15 +7,13 @@ class AnimatedCircle extends AnimatedWidget {
 
   Widget build(BuildContext context) {
     final Animation<double> animation = listenable;
-    return Center(
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        height: animation.value,
-        width: animation.value,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.red,
-        ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      height: animation.value,
+      width: animation.value,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.red,
       ),
     );
   }
