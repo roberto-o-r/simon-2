@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
     controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<double>(begin: 150, end: 160).animate(controller)
+    animation = Tween<double>(begin: 1, end: 1.1).animate(controller)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
@@ -32,13 +32,28 @@ class _HomeScreenState extends State<HomeScreen>
       backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
-          Center(child: AnimatedCircle(animation: this.animation)),
+          Align(
+              alignment: Alignment(0.5, 0.2),
+              child: AnimatedCircle(
+                  animation: this.animation, color: Colors.red, size: 150)),
+          Align(
+              alignment: Alignment(-0.5, -0.2),
+              child: AnimatedCircle(
+                  animation: this.animation, color: Colors.blue, size: 140)),
+          Align(
+              alignment: Alignment(-0.5, 0.2),
+              child: AnimatedCircle(
+                  animation: this.animation, color: Colors.yellow, size: 130)),
+          Align(
+              alignment: Alignment(0.5, -0.2),
+              child: AnimatedCircle(
+                  animation: this.animation, color: Colors.green, size: 160)),
           Center(
             child: Text(
               "Simon 2",
               style: TextStyle(
                 fontSize: 40,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
