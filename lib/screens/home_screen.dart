@@ -5,27 +5,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<double>(begin: 1, end: 1.1).animate(controller)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          controller.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          controller.forward();
-        }
-      });
-    controller.forward();
-  }
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,21 +13,29 @@ class _HomeScreenState extends State<HomeScreen>
       body: Stack(
         children: <Widget>[
           Align(
-              alignment: Alignment(0.5, 0.2),
-              child: AnimatedCircle(
-                  animation: this.animation, color: Colors.red, size: 150)),
-          Align(
               alignment: Alignment(-0.5, -0.2),
               child: AnimatedCircle(
-                  animation: this.animation, color: Colors.blue, size: 140)),
-          Align(
-              alignment: Alignment(-0.5, 0.2),
-              child: AnimatedCircle(
-                  animation: this.animation, color: Colors.yellow, size: 130)),
+                  color: Colors.green,
+                  scale: 1.5,
+                  duration: Duration(milliseconds: 2000))),
           Align(
               alignment: Alignment(0.5, -0.2),
               child: AnimatedCircle(
-                  animation: this.animation, color: Colors.green, size: 160)),
+                  color: Colors.red,
+                  scale: 1.4,
+                  duration: Duration(milliseconds: 1900))),
+          Align(
+              alignment: Alignment(-0.5, 0.2),
+              child: AnimatedCircle(
+                  color: Colors.yellow,
+                  scale: 1.4,
+                  duration: Duration(milliseconds: 1800))),
+          Align(
+              alignment: Alignment(0.5, 0.2),
+              child: AnimatedCircle(
+                  color: Colors.blue,
+                  scale: 1.5,
+                  duration: Duration(milliseconds: 2100))),
           Center(
             child: Text(
               "Simon 2",
@@ -60,11 +48,5 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 }
