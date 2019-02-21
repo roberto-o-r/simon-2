@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simon_2/util/simon_colors.dart';
 import 'package:simon_2/widgets/animated_circle.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,25 +16,25 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
               alignment: Alignment(-0.5, -0.2),
               child: AnimatedCircle(
-                  color: Colors.green,
+                  color: SimonColors.green,
                   scale: 1.5,
                   duration: Duration(milliseconds: 2000))),
           Align(
               alignment: Alignment(0.5, -0.2),
               child: AnimatedCircle(
-                  color: Colors.red,
+                  color: SimonColors.red,
                   scale: 1.4,
                   duration: Duration(milliseconds: 1900))),
           Align(
               alignment: Alignment(-0.5, 0.2),
               child: AnimatedCircle(
-                  color: Colors.yellow,
+                  color: SimonColors.yellow,
                   scale: 1.4,
                   duration: Duration(milliseconds: 1800))),
           Align(
               alignment: Alignment(0.5, 0.2),
               child: AnimatedCircle(
-                  color: Colors.blue,
+                  color: SimonColors.blue,
                   scale: 1.5,
                   duration: Duration(milliseconds: 2100))),
           Center(
