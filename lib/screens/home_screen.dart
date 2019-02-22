@@ -9,56 +9,64 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: <Widget>[
-          Align(
-              alignment: Alignment(-0.5, -0.2),
-              child: AnimatedCircle(
-                  color: SimonColors.green,
-                  scale: 1.5,
-                  duration: Duration(milliseconds: 2000))),
-          Align(
-              alignment: Alignment(0.5, -0.2),
-              child: AnimatedCircle(
-                  color: SimonColors.red,
-                  scale: 1.4,
-                  duration: Duration(milliseconds: 1900))),
-          Align(
-              alignment: Alignment(-0.5, 0.2),
-              child: AnimatedCircle(
-                  color: SimonColors.yellow,
-                  scale: 1.4,
-                  duration: Duration(milliseconds: 1800))),
-          Align(
-              alignment: Alignment(0.5, 0.2),
-              child: AnimatedCircle(
-                  color: SimonColors.blue,
-                  scale: 1.5,
-                  duration: Duration(milliseconds: 2100))),
-          Center(
-            child: Text(
-              "Simon 2",
-              style: TextStyle(
-                fontSize: 40,
-                fontFamily: 'Quantify',
-                color: Colors.black,
+    return GestureDetector(
+      child: Scaffold(
+          backgroundColor: Colors.black,
+          body: GestureDetector(
+            onTapDown: (TapDownDetails details) =>
+                Navigator.pushNamed(context, "/game"),
+            child: Container(
+              color: Colors.black,
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                      alignment: Alignment(-0.5, -0.2),
+                      child: AnimatedCircle(
+                          color: SimonColors.green,
+                          scale: 1.5,
+                          duration: Duration(milliseconds: 2000))),
+                  Align(
+                      alignment: Alignment(0.5, -0.2),
+                      child: AnimatedCircle(
+                          color: SimonColors.red,
+                          scale: 1.4,
+                          duration: Duration(milliseconds: 1900))),
+                  Align(
+                      alignment: Alignment(-0.5, 0.2),
+                      child: AnimatedCircle(
+                          color: SimonColors.yellow,
+                          scale: 1.4,
+                          duration: Duration(milliseconds: 1800))),
+                  Align(
+                      alignment: Alignment(0.5, 0.2),
+                      child: AnimatedCircle(
+                          color: SimonColors.blue,
+                          scale: 1.5,
+                          duration: Duration(milliseconds: 2100))),
+                  Center(
+                    child: Text(
+                      "Simon 2",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontFamily: 'Quantify',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 50),
+                      child: Text(
+                        "Tap anywhere to start",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 50),
-              child: Text(
-                "Tap anywhere to start",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ),
-          )
-        ],
-      ),
+          )),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simon_2/screens/game_screen.dart';
 import 'package:simon_2/screens/home_screen.dart';
 
 class Simon2App extends StatefulWidget {
@@ -10,7 +11,10 @@ class _SimonAppState extends State<Simon2App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
-      home: HomeScreen(),
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/game': (context) => GameScreen()
+      },
     );
   }
 }
