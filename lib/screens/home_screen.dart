@@ -42,10 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
               "Simon 2",
               style: TextStyle(
                 fontSize: 40,
+                fontFamily: 'Quantify',
                 color: Colors.black,
               ),
             ),
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 50),
+              child: Text(
+                "Tap anywhere to start",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          )
         ],
       ),
     );

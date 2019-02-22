@@ -9,7 +9,7 @@ class _SimonAppState extends State<Simon2App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Quantify'),
+      theme: ThemeData(),
       home: HomeScreen(),
     );
   }
