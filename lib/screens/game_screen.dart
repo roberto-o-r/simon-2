@@ -68,6 +68,18 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
           ),
+          Center(
+            child: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: SimonColors.translucent),
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text(
+                    "00",
+                    style: TextStyle(fontSize: 50, color: Colors.white),
+                  ),
+                )),
+          )
         ],
       ),
     );
