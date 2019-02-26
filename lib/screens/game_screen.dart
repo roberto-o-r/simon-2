@@ -49,6 +49,10 @@ class _GameScreenState extends State<GameScreen> {
       // Game over.
       setState(() {
         _locked = true;
+        _green = SimonColors.greenDisabled;
+        _red = SimonColors.redDisabled;
+        _yellow = SimonColors.yellowDisabled;
+        _blue = SimonColors.blueDisabled;
       });
     }
   }
