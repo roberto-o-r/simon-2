@@ -3,6 +3,7 @@ import 'package:simon_2/util/simon_colors.dart';
 import 'package:simon_2/widgets/animated_circle.dart';
 
 class HomeScreen extends StatefulWidget {
+  @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
