@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:simon_2/util/simon_colors.dart';
 
@@ -16,6 +17,10 @@ class _GameScreenState extends State<GameScreen> {
   Color _red = SimonColors.red;
   Color _yellow = SimonColors.yellow;
   Color _blue = SimonColors.blue;
+  AudioCache player1 = new AudioCache(prefix: 'sounds/');
+  AudioCache player2 = new AudioCache(prefix: 'sounds/');
+  AudioCache player3 = new AudioCache(prefix: 'sounds/');
+  AudioCache player4 = new AudioCache(prefix: 'sounds/');
 
   void _startGame() {
     // Start game by first Simon move.
@@ -37,6 +42,7 @@ class _GameScreenState extends State<GameScreen> {
   void _userPlay(int number) {
     // Verify user movement.
     if (check.first == number) {
+      _playSound(number);
       check.removeAt(0);
       if (check.isEmpty) {
         // User has completed all the movements. It's Simon's turn.
@@ -54,6 +60,7 @@ class _GameScreenState extends State<GameScreen> {
         _yellow = SimonColors.yellowDisabled;
         _blue = SimonColors.blueDisabled;
       });
+      _playSound(5);
     }
   }
 
@@ -93,6 +100,8 @@ class _GameScreenState extends State<GameScreen> {
           break;
       }
 
+      _playSound(n);
+
       await _simonWait();
 
       setState(() {
@@ -114,12 +123,40 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void _playSound(int number) {
+    switch (number) {
+      case 1:
+        player1.play('classic-1.mp3');
+        break;
+      case 2:
+        player2.play('classic-2.mp3');
+        break;
+      case 3:
+        player3.play('classic-3.mp3');
+        break;
+      case 4:
+        player4.play('classic-4.mp3');
+        break;
+      default:
+        player1.play('classic-1.mp3');
+        player2.play('classic-2.mp3');
+        player3.play('classic-3.mp3');
+        player4.play('classic-4.mp3');
+    }
+  }
+
   Future _simonWait() async {
     await Future.delayed(Duration(milliseconds: 500));
   }
 
   @override
   void initState() {
+    // Load sounds.
+    player1.load('classic-1.mp3');
+    player2.load('classic-1.mp3');
+    player3.load('classic-1.mp3');
+    player4.load('classic-1.mp3');
+
     // Start a new game.
     _startGame();
 

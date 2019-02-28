@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.7.0
+  audioplayers: ^0.10.0
 
 # The following specifies the icon image of the app
 flutter_icons:
@@ -58,3 +59,9 @@ flutter:
     - family: Quantify
       fonts:
         - asset: assets/fonts/Quantify.ttf
+  
+  assets:
+    - assets/sounds/classic-1.mp3
+    - assets/sounds/classic-2.mp3
+    - assets/sounds/classic-3.mp3
+    - assets/sounds/classic-4.mp3
