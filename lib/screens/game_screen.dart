@@ -13,6 +13,7 @@ class _GameScreenState extends State<GameScreen> {
   List check = new List<int>();
   int _score = 0;
   bool _locked = false;
+  String _message = "";
   Color _green = SimonColors.green;
   Color _red = SimonColors.red;
   Color _yellow = SimonColors.yellow;
@@ -22,7 +23,20 @@ class _GameScreenState extends State<GameScreen> {
   AudioCache player3 = new AudioCache(prefix: 'sounds/');
   AudioCache player4 = new AudioCache(prefix: 'sounds/');
 
-  void _startGame() {
+  void _startGame() async {
+    // Show initial message.
+    setState(() {
+      _message = "Ready?";
+    });
+    await _simonWait(1000);
+    setState(() {
+      _message = "Go!";
+    });
+    await _simonWait(1000);
+    setState(() {
+      _message = "";
+    });
+
     // Start game by first Simon move.
     _simonPlay();
   }
@@ -145,9 +159,11 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
-  Future _simonWait() async {
-    await Future.delayed(Duration(milliseconds: 500));
+  Future _simonWait([int miliseconds = 500]) async {
+    await Future.delayed(Duration(milliseconds: miliseconds));
   }
+
+  void _showMessage() {}
 
   @override
   void initState() {
@@ -250,6 +266,23 @@ class _GameScreenState extends State<GameScreen> {
                       style: TextStyle(fontSize: 40, color: Colors.white),
                     ),
                   )),
+            ),
+            Visibility(
+              visible: _message == "" ? false : true,
+              child: Container(
+                color: SimonColors.translucent,
+                child: Center(
+                  child: Text(
+                    _message,
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.white,
+                      fontFamily: 'Quantify',
+                    ),
+                  ),
+                ),
+                constraints: BoxConstraints.expand(),
+              ),
             )
           ],
         ),
