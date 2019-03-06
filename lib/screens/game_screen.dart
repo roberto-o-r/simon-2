@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:audioplayers/audio_cache.dart';
@@ -22,6 +23,7 @@ class _GameScreenState extends State<GameScreen> {
   AudioCache player2 = new AudioCache(prefix: 'sounds/');
   AudioCache player3 = new AudioCache(prefix: 'sounds/');
   AudioCache player4 = new AudioCache(prefix: 'sounds/');
+  Timer _countdown;
 
   void _startGame() async {
     // Show initial message.
@@ -54,6 +56,8 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _userPlay(int number) {
+    // Reset countdown.
+    _countdown.cancel();
     // Verify user movement.
     if (check.first == number) {
       _playSound(number);
@@ -64,17 +68,13 @@ class _GameScreenState extends State<GameScreen> {
           _score++;
           _simonPlay();
         });
+      } else {
+        // Restart countdown.
+        _startCountDown();
       }
     } else {
       // Game over.
-      setState(() {
-        _locked = true;
-        _green = SimonColors.greenDisabled;
-        _red = SimonColors.redDisabled;
-        _yellow = SimonColors.yellowDisabled;
-        _blue = SimonColors.blueDisabled;
-      });
-      _playSound(5);
+      _gameOver();
     }
   }
 
@@ -135,6 +135,9 @@ class _GameScreenState extends State<GameScreen> {
       _yellow = SimonColors.yellow;
       _blue = SimonColors.blue;
     });
+
+    // Start countdown.
+    _startCountDown();
   }
 
   void _playSound(int number) {
@@ -163,7 +166,22 @@ class _GameScreenState extends State<GameScreen> {
     await Future.delayed(Duration(milliseconds: miliseconds));
   }
 
-  void _showMessage() {}
+  void _startCountDown() {
+    _countdown = new Timer(Duration(milliseconds: 5000), _gameOver);
+  }
+
+  void _gameOver() {
+    _countdown.cancel();
+    setState(() {
+      _locked = true;
+      _green = SimonColors.greenDisabled;
+      _red = SimonColors.redDisabled;
+      _yellow = SimonColors.yellowDisabled;
+      _blue = SimonColors.blueDisabled;
+      _message = "Game Over";
+    });
+    _playSound(5);
+  }
 
   @override
   void initState() {
