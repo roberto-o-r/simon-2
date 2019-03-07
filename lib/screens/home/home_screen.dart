@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simon_2/screens/home/widgets/animated_circle.dart';
 import 'package:simon_2/util/simon_colors.dart';
-import 'package:simon_2/widgets/animated_circle.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
