@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simon_2/screens/game/game_screen.dart';
+import 'package:simon_2/screens/game/test_screen.dart';
 import 'package:simon_2/screens/home/home_screen.dart';
 
 class Simon2App extends StatefulWidget {
@@ -13,7 +13,7 @@ class _SimonAppState extends State<Simon2App> {
       theme: ThemeData(),
       routes: {
         '/': (context) => HomeScreen(),
-        '/game': (context) => GameScreen()
+        '/game': (context) => TestScreen()
       },
     );
   }

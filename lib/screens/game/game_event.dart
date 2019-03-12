@@ -1,5 +1,5 @@
-abstract class GameEvent {}
+abstract class CounterEvent {}
 
-class UserPlayEvent extends GameEvent {}
+class IncrementEvent extends CounterEvent {}
 
-class SimonPlayEvent extends GameEvent {}
+class DecrementEvent extends CounterEvent {}
