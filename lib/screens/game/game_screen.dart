@@ -14,7 +14,6 @@ class _GameScreenState extends State<GameScreen> {
   List check = new List<int>();
   int _score = 0;
   bool _locked = false;
-  String _message = "";
   Color _green = SimonColors.green;
   Color _red = SimonColors.red;
   Color _yellow = SimonColors.yellow;
@@ -24,6 +23,7 @@ class _GameScreenState extends State<GameScreen> {
   AudioCache player3 = new AudioCache(prefix: 'sounds/');
   AudioCache player4 = new AudioCache(prefix: 'sounds/');
   Timer _countdown;
+  String _message = "";
 
   void _startGame() async {
     // Show initial message.
@@ -187,9 +187,9 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     // Load sounds.
     player1.load('classic-1.mp3');
-    player2.load('classic-1.mp3');
-    player3.load('classic-1.mp3');
-    player4.load('classic-1.mp3');
+    player2.load('classic-2.mp3');
+    player3.load('classic-3.mp3');
+    player4.load('classic-4.mp3');
 
     // Start a new game.
     _startGame();

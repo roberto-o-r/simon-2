@@ -1,7 +1,7 @@
-class CounterState {
-  final int counter;
+class GameState {
+  final List<int> game;
 
-  const CounterState({this.counter});
+  const GameState({this.game});
 
-  factory CounterState.initial() => CounterState(counter: 0);
+  factory GameState.initial() => GameState(game: List<int>());
 }

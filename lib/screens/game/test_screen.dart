@@ -1,8 +1,10 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simon_2/screens/game/game_bloc.dart';
 import 'package:simon_2/screens/game/game_event.dart';
 import 'package:simon_2/screens/game/game_state.dart';
+import 'package:simon_2/util/simon_colors.dart';
 
 class TestScreen extends StatefulWidget {
   _TestScreenState createState() => _TestScreenState();
@@ -11,23 +13,164 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   final _gameBloc = CounterBloc();
 
+  Color _green = SimonColors.green;
+  Color _red = SimonColors.red;
+  Color _yellow = SimonColors.yellow;
+  Color _blue = SimonColors.blue;
+  AudioCache _player1 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player2 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player3 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player4 = new AudioCache(prefix: 'sounds/');
+  String _message = "";
+
+  void _startGame() async {
+    // Show initial message.
+    setState(() {
+      _message = "Ready?";
+    });
+    await _simonWait(1000);
+    setState(() {
+      _message = "Go!";
+    });
+    await _simonWait(1000);
+    setState(() {
+      _message = "";
+    });
+
+    // Start game by first Simon move.
+    _gameBloc.dispatch(SimonPlay());
+  }
+
+  Future _simonWait([int miliseconds = 500]) async {
+    await Future.delayed(Duration(milliseconds: miliseconds));
+  }
+
   @override
   void initState() {
-    super.initState();
+    // Load sounds.
+    _player1.load('classic-1.mp3');
+    _player2.load('classic-2.mp3');
+    _player3.load('classic-3.mp3');
+    _player4.load('classic-4.mp3');
 
-    _gameBloc.dispatch(IncrementEvent());
+    _startGame();
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: _gameBloc,
-      builder: (context, CounterState state) {
+      builder: (context, GameState state) {
         return Scaffold(
-            backgroundColor: Colors.red,
-            body: Center(
-              child: Text("Length: ${state.counter}"),
-            ));
+          backgroundColor: Colors.black,
+          body: AbsorbPointer(
+            absorbing: false,
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    heightFactor: 0.5,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 4),
+                      child: RaisedButton(
+                        color: _green,
+                        onPressed: () {
+                          //_userPlay(1);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    heightFactor: 0.5,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 4, top: 8, right: 8, bottom: 4),
+                      child: RaisedButton(
+                        color: _red,
+                        onPressed: () {
+                          //_userPlay(2);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    heightFactor: 0.5,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 8, top: 4, right: 4, bottom: 8),
+                      child: RaisedButton(
+                        color: _yellow,
+                        onPressed: () {
+                          //_userPlay(3);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    heightFactor: 0.5,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 4, top: 4, right: 8, bottom: 8),
+                      child: RaisedButton(
+                        color: _blue,
+                        onPressed: () {
+                          //_userPlay(4);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: SimonColors.translucent),
+                      child: Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Text(
+                          "${state.game.length}",
+                          style: TextStyle(fontSize: 40, color: Colors.white),
+                        ),
+                      )),
+                ),
+                Visibility(
+                  visible: _message == "" ? false : true,
+                  child: Container(
+                    color: SimonColors.translucent,
+                    child: Center(
+                      child: Text(
+                        _message,
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white,
+                          fontFamily: 'Quantify',
+                        ),
+                      ),
+                    ),
+                    constraints: BoxConstraints.expand(),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
       },
     );
   }
