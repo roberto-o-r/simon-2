@@ -21,29 +21,6 @@ class _TestScreenState extends State<TestScreen> {
   AudioCache _player2 = new AudioCache(prefix: 'sounds/');
   AudioCache _player3 = new AudioCache(prefix: 'sounds/');
   AudioCache _player4 = new AudioCache(prefix: 'sounds/');
-  String _message = "";
-
-  void _startGame() async {
-    // Show initial message.
-    setState(() {
-      _message = "Ready?";
-    });
-    await _simonWait(1000);
-    setState(() {
-      _message = "Go!";
-    });
-    await _simonWait(1000);
-    setState(() {
-      _message = "";
-    });
-
-    // Start game by first Simon move.
-    _gameBloc.dispatch(SimonPlay());
-  }
-
-  Future _simonWait([int miliseconds = 500]) async {
-    await Future.delayed(Duration(milliseconds: miliseconds));
-  }
 
   @override
   void initState() {
@@ -53,7 +30,7 @@ class _TestScreenState extends State<TestScreen> {
     _player3.load('classic-3.mp3');
     _player4.load('classic-4.mp3');
 
-    _startGame();
+    _gameBloc.dispatch(StartGame());
 
     super.initState();
   }
@@ -151,12 +128,12 @@ class _TestScreenState extends State<TestScreen> {
                       )),
                 ),
                 Visibility(
-                  visible: _message == "" ? false : true,
+                  visible: state.message == "" ? false : true,
                   child: Container(
                     color: SimonColors.translucent,
                     child: Center(
                       child: Text(
-                        _message,
+                        state.message,
                         style: TextStyle(
                           fontSize: 40,
                           color: Colors.white,
