@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -5,6 +6,8 @@ import 'package:simon_2/screens/game/game_event.dart';
 import 'package:simon_2/screens/game/game_state.dart';
 
 class CounterBloc extends Bloc<GameEvent, GameState> {
+  Timer _countdown;
+
   @override
   GameState get initialState => GameState.initial();
 
@@ -50,7 +53,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
 
   Stream<GameState> _userPlay(UserPlay event) async* {
     // Reset countdown.
-    // TODO.
+    _countdown.cancel();
 
     // Verify user movement.
     if (currentState.check.first == event.number) {
@@ -62,7 +65,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
         this.dispatch(SimonPlay());
       } else {
         // Restart countdown.
-        //_startCountDown();
+        _startCountDown();
       }
     } else {
       // Game over.
@@ -71,7 +74,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _gameOver() async* {
-    //_countdown.cancel();
+    _countdown.cancel();
     yield currentState.copyWith(locked: true, message: "Game Over");
     //_playSound(5);
   }
@@ -97,7 +100,13 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
 
     yield currentState.copyWith(locked: false);
 
-    //TODO: Start countdown.
+    // Restart countdown.
+    _startCountDown();
+  }
+
+  void _startCountDown() {
+    _countdown = new Timer(
+        Duration(milliseconds: 5000), () => {this.dispatch(GameOver())});
   }
 
   Future _simonWait([int miliseconds = 500]) async {

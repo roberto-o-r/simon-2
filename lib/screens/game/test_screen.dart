@@ -36,6 +36,7 @@ class _TestScreenState extends State<TestScreen> {
     return BlocBuilder(
       bloc: _gameBloc,
       builder: (context, GameState state) {
+        print("State changed");
         return Scaffold(
           backgroundColor: Colors.black,
           body: AbsorbPointer(
