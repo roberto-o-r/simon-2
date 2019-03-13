@@ -55,7 +55,7 @@ class _TestScreenState extends State<TestScreen> {
                             ? SimonColors.green
                             : SimonColors.greenDisabled,
                         onPressed: () {
-                          //_userPlay(1);
+                          _gameBloc.dispatch(UserPlay(1));
                         },
                       ),
                     ),
@@ -74,7 +74,7 @@ class _TestScreenState extends State<TestScreen> {
                             ? SimonColors.red
                             : SimonColors.redDisabled,
                         onPressed: () {
-                          //_userPlay(2);
+                          _gameBloc.dispatch(UserPlay(2));
                         },
                       ),
                     ),
@@ -93,7 +93,7 @@ class _TestScreenState extends State<TestScreen> {
                             ? SimonColors.yellow
                             : SimonColors.yellowDisabled,
                         onPressed: () {
-                          //_userPlay(3);
+                          _gameBloc.dispatch(UserPlay(3));
                         },
                       ),
                     ),
@@ -112,7 +112,7 @@ class _TestScreenState extends State<TestScreen> {
                             ? SimonColors.blue
                             : SimonColors.blueDisabled,
                         onPressed: () {
-                          //_userPlay(4);
+                          _gameBloc.dispatch(UserPlay(4));
                         },
                       ),
                     ),

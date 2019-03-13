@@ -15,6 +15,8 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
       yield* _startGame();
     } else if (event is SimonPlay) {
       _simonPlay();
+    } else if (event is UserPlay) {
+      yield* _userPlay(event);
     } else if (event is AnimateGame) {
       yield* _animateGame();
     }
@@ -42,6 +44,28 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
 
     // Animate game movements so far.
     this.dispatch(AnimateGame());
+  }
+
+  Stream<GameState> _userPlay(UserPlay event) async* {
+    // Reset countdown.
+    // TODO.
+
+    // Verify user movement.
+    if (currentState.check.first == event.number) {
+      //_playSound(number);
+      currentState.check.removeAt(0);
+      if (currentState.check.isEmpty) {
+        // User has completed all the movements. It's Simon's turn.
+        yield currentState.copyWith(score: currentState.score + 1);
+        this.dispatch(SimonPlay());
+      } else {
+        // Restart countdown.
+        //_startCountDown();
+      }
+    } else {
+      // Game over.
+      this.dispatch(GameOver());
+    }
   }
 
   Stream<GameState> _animateGame() async* {
