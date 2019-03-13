@@ -31,19 +31,16 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
     this.dispatch(SimonPlay());
   }
 
-  List<int> _simonPlay(GameState currentState) {
-    // Get current game.
-    var game = currentState.game;
+  List<int> _simonPlay() {
     // Simon makes a new move.
     var rnd = new Random();
     var number = 1 + rnd.nextInt(4);
-    game.add(number);
-    //check.clear();
-    //check.addAll(game);
+    currentState.game.add(number);
+    currentState.check.clear();
+    currentState.check.addAll(currentState.game);
 
     // Animate game movements so far.
-    //_animateGame();
-    return game;
+    this.dispatch(AnimateGame());
   }
 
   Future _simonWait([int miliseconds = 500]) async {
