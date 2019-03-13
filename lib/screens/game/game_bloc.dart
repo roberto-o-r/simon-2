@@ -17,6 +17,8 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
       _simonPlay();
     } else if (event is UserPlay) {
       yield* _userPlay(event);
+    } else if (event is GameOver) {
+      yield* _gameOver();
     } else if (event is AnimateGame) {
       yield* _animateGame();
     }
@@ -66,6 +68,12 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
       // Game over.
       this.dispatch(GameOver());
     }
+  }
+
+  Stream<GameState> _gameOver() async* {
+    //_countdown.cancel();
+    yield currentState.copyWith(locked: true, message: "Game Over");
+    //_playSound(5);
   }
 
   Stream<GameState> _animateGame() async* {
