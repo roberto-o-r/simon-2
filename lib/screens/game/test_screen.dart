@@ -13,10 +13,6 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   final _gameBloc = CounterBloc();
 
-  Color _green = SimonColors.green;
-  Color _red = SimonColors.red;
-  Color _yellow = SimonColors.yellow;
-  Color _blue = SimonColors.blue;
   AudioCache _player1 = new AudioCache(prefix: 'sounds/');
   AudioCache _player2 = new AudioCache(prefix: 'sounds/');
   AudioCache _player3 = new AudioCache(prefix: 'sounds/');
@@ -43,7 +39,7 @@ class _TestScreenState extends State<TestScreen> {
         return Scaffold(
           backgroundColor: Colors.black,
           body: AbsorbPointer(
-            absorbing: false,
+            absorbing: state.locked,
             child: Stack(
               children: <Widget>[
                 Align(
@@ -55,7 +51,9 @@ class _TestScreenState extends State<TestScreen> {
                       padding:
                           EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 4),
                       child: RaisedButton(
-                        color: _green,
+                        color: !state.locked || state.toggled == 1
+                            ? SimonColors.green
+                            : SimonColors.greenDisabled,
                         onPressed: () {
                           //_userPlay(1);
                         },
@@ -72,7 +70,9 @@ class _TestScreenState extends State<TestScreen> {
                       padding:
                           EdgeInsets.only(left: 4, top: 8, right: 8, bottom: 4),
                       child: RaisedButton(
-                        color: _red,
+                        color: !state.locked || state.toggled == 2
+                            ? SimonColors.red
+                            : SimonColors.redDisabled,
                         onPressed: () {
                           //_userPlay(2);
                         },
@@ -89,7 +89,9 @@ class _TestScreenState extends State<TestScreen> {
                       padding:
                           EdgeInsets.only(left: 8, top: 4, right: 4, bottom: 8),
                       child: RaisedButton(
-                        color: _yellow,
+                        color: !state.locked || state.toggled == 3
+                            ? SimonColors.yellow
+                            : SimonColors.yellowDisabled,
                         onPressed: () {
                           //_userPlay(3);
                         },
@@ -106,7 +108,9 @@ class _TestScreenState extends State<TestScreen> {
                       padding:
                           EdgeInsets.only(left: 4, top: 4, right: 8, bottom: 8),
                       child: RaisedButton(
-                        color: _blue,
+                        color: !state.locked || state.toggled == 4
+                            ? SimonColors.blue
+                            : SimonColors.blueDisabled,
                         onPressed: () {
                           //_userPlay(4);
                         },
@@ -122,7 +126,7 @@ class _TestScreenState extends State<TestScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(12),
                         child: Text(
-                          "${state.game.length}",
+                          "${state.toggled}",
                           style: TextStyle(fontSize: 40, color: Colors.white),
                         ),
                       )),

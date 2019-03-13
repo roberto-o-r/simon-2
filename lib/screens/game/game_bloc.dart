@@ -13,9 +13,10 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
       GameState currentState, GameEvent event) async* {
     if (event is StartGame) {
       yield* _startGame();
-    }
-    if (event is SimonPlay) {
-      yield currentState.copyWith(game: _simonPlay(currentState));
+    } else if (event is SimonPlay) {
+      _simonPlay();
+    } else if (event is AnimateGame) {
+      yield* _animateGame();
     }
   }
 
@@ -31,7 +32,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
     this.dispatch(SimonPlay());
   }
 
-  List<int> _simonPlay() {
+  void _simonPlay() {
     // Simon makes a new move.
     var rnd = new Random();
     var number = 1 + rnd.nextInt(4);
@@ -41,6 +42,30 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
 
     // Animate game movements so far.
     this.dispatch(AnimateGame());
+  }
+
+  Stream<GameState> _animateGame() async* {
+    // Lock user's movements.
+    yield currentState.copyWith(locked: true);
+
+    await _simonWait();
+
+    // Light movements.
+    for (int n in currentState.game) {
+      yield currentState.copyWith(toggled: n);
+
+      //TODO: playsound.
+
+      await _simonWait();
+
+      yield currentState.copyWith(toggled: 0);
+
+      await _simonWait();
+    }
+
+    yield currentState.copyWith(locked: false);
+
+    //TODO: Start countdown.
   }
 
   Future _simonWait([int miliseconds = 500]) async {
