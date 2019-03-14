@@ -16,7 +16,7 @@ before_script:
 script:
   - ./flutter/bin/flutter test --coverage
 after_success:
-    - codecov
+    - bash <(curl -s https://codecov.io/bash)
 cache:
   directories:
     - $HOME/.pub-cache  
