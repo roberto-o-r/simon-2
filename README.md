@@ -1,5 +1,6 @@
 # Simon 2
 [![Build Status](https://travis-ci.com/robertoissc/simon-2.svg?branch=master)](https://travis-ci.com/robertoissc/simon-2)
+[![codecov](https://codecov.io/gh/robertoissc/simon-2/branch/master/graph/badge.svg)](https://codecov.io/gh/robertoissc/simon-2)
 
 Simon 2 game in Flutter for Android and iOS.
 
