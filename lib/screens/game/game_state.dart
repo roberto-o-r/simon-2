@@ -3,6 +3,7 @@ class GameState {
   final List<int> check;
   final String message;
   final bool locked;
+  final bool over;
   final int toggled;
   final int score;
 
@@ -11,6 +12,7 @@ class GameState {
       this.check,
       this.message,
       this.locked,
+      this.over,
       this.toggled,
       this.score});
 
@@ -19,6 +21,7 @@ class GameState {
       check: List<int>(),
       message: "",
       locked: false,
+      over: false,
       toggled: 0,
       score: 0);
 
@@ -27,6 +30,7 @@ class GameState {
     List<int> check,
     String message,
     bool locked,
+    bool over,
     int toggled,
     int score,
   }) {
@@ -35,6 +39,7 @@ class GameState {
       check: check ?? this.check,
       message: message ?? this.message,
       locked: locked ?? this.locked,
+      over: over ?? this.over,
       toggled: toggled ?? this.toggled,
       score: score ?? this.score,
     );

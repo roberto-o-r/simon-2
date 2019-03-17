@@ -88,7 +88,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
 
   Stream<GameState> _gameOver() async* {
     _countdown.cancel();
-    yield currentState.copyWith(locked: true, message: "Game Over");
+    yield currentState.copyWith(locked: true, over: true, message: "Game Over");
     _playSound(5);
   }
 

@@ -39,7 +39,7 @@ class _TestScreenState extends State<TestScreen> {
         return Scaffold(
           backgroundColor: Colors.black,
           body: AbsorbPointer(
-            absorbing: state.locked,
+            absorbing: state.locked && !state.over, 
             child: Stack(
               children: <Widget>[
                 Align(
@@ -132,22 +132,46 @@ class _TestScreenState extends State<TestScreen> {
                       )),
                 ),
                 Visibility(
-                  visible: state.message == "" ? false : true,
-                  child: Container(
-                    color: SimonColors.translucent,
-                    child: Center(
-                      child: Text(
-                        state.message,
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.white,
-                          fontFamily: 'Quantify',
+                    visible: state.message == "" ? false : true,
+                    child: GestureDetector( 
+                      onTapDown: (TapDownDetails details) {
+                        if (state.over) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Container(
+                        color: SimonColors.translucent,
+                        child: Stack(
+                          children: <Widget>[
+                            Center(
+                              child: Text(
+                                state.message,
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                  fontFamily: 'Quantify',
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: state.over,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 50),
+                                  child: Text(
+                                    "Tap anywhere to go back",
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
+                        constraints: BoxConstraints.expand(),
                       ),
-                    ),
-                    constraints: BoxConstraints.expand(),
-                  ),
-                )
+                    ))
               ],
             ),
           ),
