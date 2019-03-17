@@ -24,25 +24,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       alignment: Alignment(-0.5, -0.2),
                       child: AnimatedCircle(
                           color: SimonColors.green,
-                          scale: 1.5,
+                          size: MediaQuery.of(context).size.width * 0.45,
                           duration: Duration(milliseconds: 2000))),
                   Align(
                       alignment: Alignment(0.5, -0.2),
                       child: AnimatedCircle(
                           color: SimonColors.red,
-                          scale: 1.4,
+                          size: MediaQuery.of(context).size.width * 0.40,
                           duration: Duration(milliseconds: 1900))),
                   Align(
                       alignment: Alignment(-0.5, 0.2),
                       child: AnimatedCircle(
                           color: SimonColors.yellow,
-                          scale: 1.4,
+                          size: MediaQuery.of(context).size.width * 0.40,
                           duration: Duration(milliseconds: 1800))),
                   Align(
                       alignment: Alignment(0.5, 0.2),
                       child: AnimatedCircle(
                           color: SimonColors.blue,
-                          scale: 1.5,
+                          size: MediaQuery.of(context).size.width * 0.45,
                           duration: Duration(milliseconds: 2100))),
                   Center(
                     child: Text(

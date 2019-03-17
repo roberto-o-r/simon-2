@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class AnimatedCircle extends StatefulWidget {
   final Color color;
   final Duration duration;
-  final double scale;
+  final double size;
 
   AnimatedCircle(
-      {@required this.color, @required this.duration, @required this.scale});
+      {@required this.color, @required this.duration, @required this.size});
 
   @override
   _AnimatedCircleState createState() => _AnimatedCircleState();
@@ -26,8 +26,8 @@ class _AnimatedCircleState extends State<AnimatedCircle>
       builder: (BuildContext context, Widget child) {
         return Container(
           margin: EdgeInsets.symmetric(vertical: 10),
-          height: _animation.value * widget.scale,
-          width: _animation.value * widget.scale,
+          height: _animation.value * widget.size,
+          width: _animation.value * widget.size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: widget.color,
@@ -42,7 +42,7 @@ class _AnimatedCircleState extends State<AnimatedCircle>
     super.initState();
 
     _controller = AnimationController(vsync: this, duration: widget.duration);
-    _animation = Tween<double>(begin: 100, end: 110).animate(_controller)
+    _animation = Tween<double>(begin: 1, end: 1.1).animate(_controller)
       ..addStatusListener(handler);
   }
 
