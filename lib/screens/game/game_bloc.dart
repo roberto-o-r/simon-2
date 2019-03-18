@@ -96,7 +96,7 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
     // Lock user's movements.
     yield currentState.copyWith(locked: true);
 
-    await _simonWait();
+    await _simonWait(1000);
 
     // Light movements.
     for (int n in currentState.game) {
