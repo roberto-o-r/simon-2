@@ -4,6 +4,7 @@ class GameState {
   final String message;
   final bool locked;
   final bool over;
+  final bool play;
   final int toggled;
   final int score;
 
@@ -13,6 +14,7 @@ class GameState {
       this.message,
       this.locked,
       this.over,
+      this.play,
       this.toggled,
       this.score});
 
@@ -22,6 +24,7 @@ class GameState {
       message: "",
       locked: false,
       over: false,
+      play: false,
       toggled: 0,
       score: 0);
 
@@ -31,6 +34,7 @@ class GameState {
     String message,
     bool locked,
     bool over,
+    bool play,
     int toggled,
     int score,
   }) {
@@ -40,6 +44,7 @@ class GameState {
       message: message ?? this.message,
       locked: locked ?? this.locked,
       over: over ?? this.over,
+      play: play ?? this.play,
       toggled: toggled ?? this.toggled,
       score: score ?? this.score,
     );
