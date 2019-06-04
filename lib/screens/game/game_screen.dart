@@ -1,8 +1,9 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simon_2/screens/game/game_bloc.dart';
+import 'package:simon_2/screens/game/game_event.dart';
+import 'package:simon_2/screens/game/game_state.dart';
 import 'package:simon_2/util/simon_colors.dart';
 
 class GameScreen extends StatefulWidget {
@@ -10,301 +11,208 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  List game = new List<int>();
-  List check = new List<int>();
-  int _score = 0;
-  bool _locked = false;
-  Color _green = SimonColors.green;
-  Color _red = SimonColors.red;
-  Color _yellow = SimonColors.yellow;
-  Color _blue = SimonColors.blue;
-  AudioCache player1 = new AudioCache(prefix: 'sounds/');
-  AudioCache player2 = new AudioCache(prefix: 'sounds/');
-  AudioCache player3 = new AudioCache(prefix: 'sounds/');
-  AudioCache player4 = new AudioCache(prefix: 'sounds/');
-  Timer _countdown;
-  String _message = "";
+  final _gameBloc = CounterBloc();
 
-  void _startGame() async {
-    // Show initial message.
-    setState(() {
-      _message = "Ready?";
-    });
-    await _simonWait(1000);
-    setState(() {
-      _message = "Go!";
-    });
-    await _simonWait(1000);
-    setState(() {
-      _message = "";
-    });
-
-    // Start game by first Simon move.
-    _simonPlay();
-  }
-
-  void _simonPlay() {
-    // Simon makes a new move.
-    var rnd = new Random();
-    var number = 1 + rnd.nextInt(4);
-    game.add(number);
-    check.clear();
-    check.addAll(game);
-
-    // Animate game movements so far.
-    _animateGame();
-  }
-
-  void _userPlay(int number) {
-    // Reset countdown.
-    _countdown.cancel();
-    // Verify user movement.
-    if (check.first == number) {
-      _playSound(number);
-      check.removeAt(0);
-      if (check.isEmpty) {
-        // User has completed all the movements. It's Simon's turn.
-        setState(() {
-          _score++;
-          _simonPlay();
-        });
-      } else {
-        // Restart countdown.
-        _startCountDown();
-      }
-    } else {
-      // Game over.
-      _gameOver();
-    }
-  }
-
-  void _animateGame() async {
-    // Lock screen to prevent user interaction.
-    setState(() {
-      _locked = true;
-      _green = SimonColors.greenDisabled;
-      _red = SimonColors.redDisabled;
-      _yellow = SimonColors.yellowDisabled;
-      _blue = SimonColors.blueDisabled;
-    });
-
-    await _simonWait();
-
-    for (int n in game) {
-      switch (n) {
-        case 1:
-          setState(() {
-            _green = SimonColors.green;
-          });
-          break;
-        case 2:
-          setState(() {
-            _red = SimonColors.red;
-          });
-          break;
-        case 3:
-          setState(() {
-            _yellow = SimonColors.yellow;
-          });
-          break;
-        case 4:
-          setState(() {
-            _blue = SimonColors.blue;
-          });
-          break;
-      }
-
-      _playSound(n);
-
-      await _simonWait();
-
-      setState(() {
-        _green = SimonColors.greenDisabled;
-        _red = SimonColors.redDisabled;
-        _yellow = SimonColors.yellowDisabled;
-        _blue = SimonColors.blueDisabled;
-      });
-
-      await _simonWait();
-    }
-
-    setState(() {
-      _locked = false;
-      _green = SimonColors.green;
-      _red = SimonColors.red;
-      _yellow = SimonColors.yellow;
-      _blue = SimonColors.blue;
-    });
-
-    // Start countdown.
-    _startCountDown();
-  }
-
-  void _playSound(int number) {
-    switch (number) {
-      case 1:
-        player1.play('classic-1.mp3');
-        break;
-      case 2:
-        player2.play('classic-2.mp3');
-        break;
-      case 3:
-        player3.play('classic-3.mp3');
-        break;
-      case 4:
-        player4.play('classic-4.mp3');
-        break;
-      default:
-        player1.play('classic-1.mp3');
-        player2.play('classic-2.mp3');
-        player3.play('classic-3.mp3');
-        player4.play('classic-4.mp3');
-    }
-  }
-
-  Future _simonWait([int miliseconds = 500]) async {
-    await Future.delayed(Duration(milliseconds: miliseconds));
-  }
-
-  void _startCountDown() {
-    _countdown = new Timer(Duration(milliseconds: 5000), _gameOver);
-  }
-
-  void _gameOver() {
-    _countdown.cancel();
-    setState(() {
-      _locked = true;
-      _green = SimonColors.greenDisabled;
-      _red = SimonColors.redDisabled;
-      _yellow = SimonColors.yellowDisabled;
-      _blue = SimonColors.blueDisabled;
-      _message = "Game Over";
-    });
-    _playSound(5);
-  }
+  AudioCache _player1 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player2 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player3 = new AudioCache(prefix: 'sounds/');
+  AudioCache _player4 = new AudioCache(prefix: 'sounds/');
 
   @override
   void initState() {
     // Load sounds.
-    player1.load('classic-1.mp3');
-    player2.load('classic-2.mp3');
-    player3.load('classic-3.mp3');
-    player4.load('classic-4.mp3');
+    _player1.load('sound-1.mp3');
+    _player2.load('sound-2.mp3');
+    _player3.load('sound-3.mp3');
+    _player4.load('sound-4.mp3');
 
-    // Start a new game.
-    _startGame();
+    _gameBloc.dispatch(StartGame());
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: AbsorbPointer(
-        absorbing: _locked,
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.topLeft,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                heightFactor: 0.5,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 4),
-                  child: RaisedButton(
-                    color: _green,
-                    onPressed: () {
-                      _userPlay(1);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                heightFactor: 0.5,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 4, top: 8, right: 8, bottom: 4),
-                  child: RaisedButton(
-                    color: _red,
-                    onPressed: () {
-                      _userPlay(2);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                heightFactor: 0.5,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 8, top: 4, right: 4, bottom: 8),
-                  child: RaisedButton(
-                    color: _yellow,
-                    onPressed: () {
-                      _userPlay(3);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                heightFactor: 0.5,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 4, top: 4, right: 8, bottom: 8),
-                  child: RaisedButton(
-                    color: _blue,
-                    onPressed: () {
-                      _userPlay(4);
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: SimonColors.translucent),
-                  child: Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(
-                      _score.toString(),
-                      style: TextStyle(fontSize: 40, color: Colors.white),
-                    ),
-                  )),
-            ),
-            Visibility(
-              visible: _message == "" ? false : true,
-              child: Container(
-                color: SimonColors.translucent,
-                child: Center(
-                  child: Text(
-                    _message,
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                      fontFamily: 'Quantify',
+    return BlocBuilder(
+      bloc: _gameBloc,
+      builder: (context, GameState state) {
+        if (state.play) {
+          _playSound(state.toggled);
+        }
+
+        return WillPopScope(
+          onWillPop: () {
+            _gameBloc.dispatch(GameOver());
+            Navigator.pop(context);
+          },
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            body: AbsorbPointer(
+              absorbing: state.locked && !state.over,
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 8, top: 8, right: 4, bottom: 4),
+                        child: RaisedButton(
+                          color: !state.locked || state.toggled == 1
+                              ? SimonColors.green
+                              : SimonColors.greenDisabled,
+                          onPressed: () {
+                            _playSound(1);
+                            _gameBloc.dispatch(UserPlay(1));
+                          },
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                constraints: BoxConstraints.expand(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 4, top: 8, right: 8, bottom: 4),
+                        child: RaisedButton(
+                          color: !state.locked || state.toggled == 2
+                              ? SimonColors.red
+                              : SimonColors.redDisabled,
+                          onPressed: () {
+                            _playSound(2);
+                            _gameBloc.dispatch(UserPlay(2));
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 8, top: 4, right: 4, bottom: 8),
+                        child: RaisedButton(
+                          color: !state.locked || state.toggled == 3
+                              ? SimonColors.yellow
+                              : SimonColors.yellowDisabled,
+                          onPressed: () {
+                            _playSound(3);
+                            _gameBloc.dispatch(UserPlay(3));
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 4, top: 4, right: 8, bottom: 8),
+                        child: RaisedButton(
+                          color: !state.locked || state.toggled == 4
+                              ? SimonColors.blue
+                              : SimonColors.blueDisabled,
+                          onPressed: () {
+                            _playSound(4);
+                            _gameBloc.dispatch(UserPlay(4));
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: SimonColors.translucent),
+                        child: Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            "${state.score}",
+                            style: TextStyle(fontSize: 40, color: Colors.white),
+                          ),
+                        )),
+                  ),
+                  Visibility(
+                      visible: state.message == "" ? false : true,
+                      child: GestureDetector(
+                        onTapDown: (TapDownDetails details) {
+                          if (state.over) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          color: SimonColors.translucent,
+                          child: Stack(
+                            children: <Widget>[
+                              Center(
+                                child: Text(
+                                  state.message,
+                                  style: TextStyle(
+                                    fontSize: 40,
+                                    color: Colors.white,
+                                    fontFamily: 'Quantify',
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                visible: state.over,
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(bottom: 50),
+                                    child: Text(
+                                      "Tap anywhere to go back",
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          constraints: BoxConstraints.expand(),
+                        ),
+                      ))
+                ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  void _playSound(int number) {
+    switch (number) {
+      case 1:
+        _player1.play('sound-1.mp3');
+        break;
+      case 2:
+        _player2.play('sound-2.mp3');
+        break;
+      case 3:
+        _player3.play('sound-3.mp3');
+        break;
+      case 4:
+        _player4.play('sound-4.mp3');
+        break;
+      default:
+        _player1.play('sound-1.mp3');
+        _player2.play('sound-2.mp3');
+        _player3.play('sound-3.mp3');
+        _player4.play('sound-4.mp3');
+    }
   }
 }
