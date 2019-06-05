@@ -1,4 +1,4 @@
-package com.example.simon2;
+package com.isscroberto.simon2;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
