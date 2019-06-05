@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:simon_2/screens/game/game_event.dart';
 import 'package:simon_2/screens/game/game_state.dart';
 
@@ -30,6 +31,10 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _startGame() async* {
+    // Log game start event.
+    FirebaseAnalytics analytics = FirebaseAnalytics();
+    analytics.logEvent(name: 'game_start');
+
     // Show initial message.
     yield currentState.copyWith(message: "Ready?");
     await _simonWait(1000);
@@ -76,6 +81,12 @@ class CounterBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _gameOver() async* {
+    // Log game over event.
+    FirebaseAnalytics analytics = FirebaseAnalytics();
+    analytics.logEvent(
+      name: 'game_over',
+      parameters: <String, dynamic>{'score': currentState.game.length},
+    );
     _countdown.cancel();
     yield currentState.copyWith(
         locked: true, over: true, message: "Game Over", play: true, toggled: 5);
