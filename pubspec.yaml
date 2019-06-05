@@ -15,7 +15,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+
+  firebase_core: ^0.4.0+3
+  firebase_analytics: ^3.0.2
+  firebase_crashlytics: ^0.0.4+4
   flutter_launcher_icons: ^0.7.0
   audioplayers: ^0.10.0
   flutter_bloc: ^0.7.0
