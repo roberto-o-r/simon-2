@@ -48,9 +48,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-263.92136"
-     inkscape:cy="782.33137"
+     inkscape:zoom="0.175"
+     inkscape:cx="-1254.7282"
+     inkscape:cy="1655.3288"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -76,47 +76,44 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g883">
-      <g
-         transform="translate(40.820504,-64.460182)"
-         id="g841">
-        <circle
-           style="opacity:1;fill:#66ff00;fill-opacity:1;stroke-width:0.26458332"
-           id="path819"
-           cx="29.179792"
-           cy="181.83705"
-           r="46.869045" />
-        <circle
-           style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke-width:0.26458332"
-           id="path819-9"
-           cx="99.179199"
-           cy="181.83705"
-           r="46.869045" />
-        <circle
-           style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke-width:0.26458332"
-           id="path819-9-4"
-           cx="29.179792"
-           cy="244.08331"
-           r="46.869045" />
-        <circle
-           style="opacity:1;fill:#00ccff;fill-opacity:1;stroke-width:0.26458332"
-           id="path819-9-4-4"
-           cx="99.179199"
-           cy="244.08331"
-           r="46.869045" />
-      </g>
-      <text
-         id="text868"
-         y="156.33873"
-         x="66.411598"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.39635849px;line-height:1.25;font-family:Quantify;-inkscape-font-specification:Quantify;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55990899"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quantify;-inkscape-font-specification:Quantify;stroke-width:0.55990899"
-           y="156.33873"
-           x="66.411598"
-           id="tspan866"
-           sodipodi:role="line">Simon 2</tspan></text>
+       id="g841"
+       transform="translate(40.820504,-64.460182)">
+      <circle
+         r="46.869045"
+         cy="181.83705"
+         cx="29.179792"
+         id="path819"
+         style="opacity:1;fill:#66ff00;fill-opacity:1;stroke-width:0.26458332" />
+      <circle
+         r="46.869045"
+         cy="181.83705"
+         cx="99.179199"
+         id="path819-9"
+         style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke-width:0.26458332" />
+      <circle
+         r="46.869045"
+         cy="244.08331"
+         cx="29.179792"
+         id="path819-9-4"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke-width:0.26458332" />
+      <circle
+         r="46.869045"
+         cy="244.08331"
+         cx="99.179199"
+         id="path819-9-4-4"
+         style="opacity:1;fill:#00ccff;fill-opacity:1;stroke-width:0.26458332" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.39635849px;line-height:1.25;font-family:Quantify;-inkscape-font-specification:Quantify;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.55990899"
+       x="66.411598"
+       y="156.33873"
+       id="text868"><tspan
+         sodipodi:role="line"
+         id="tspan866"
+         x="66.411598"
+         y="156.33873"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quantify;-inkscape-font-specification:Quantify;stroke-width:0.55990899">Simon 2</tspan></text>
     <g
        id="g1450"
        transform="translate(148.60186,62.00653)">
@@ -265,6 +262,161 @@
            x="-102.85147"
            id="tspan2197-4"
            sodipodi:role="line">back</tspan></text>
+    </g>
+    <g
+       id="g906"
+       inkscape:export-filename="C:\Users\7050426\Downloads\icon.png"
+       inkscape:export-xdpi="96.000023"
+       inkscape:export-ydpi="96.000023">
+      <rect
+         y="-149.04285"
+         x="47.850002"
+         height="135.46666"
+         width="135.46666"
+         id="rect893"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26939392" />
+      <g
+         transform="matrix(0.64453125,0,0,0.64453125,269.34112,-135.36767)"
+         id="g1450-5">
+        <rect
+           style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:0.29067701"
+           id="rect1439-6"
+           width="135.46666"
+           height="135.46666"
+           x="-306.29086"
+           y="16.138714" />
+        <g
+           id="g874-5"
+           transform="matrix(0.82734052,0,0,0.82734052,-161.60676,-1.7551042)"
+           inkscape:export-filename="C:\Users\7050426\Downloads\simon.png"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90">
+          <g
+             transform="translate(-157.18929,-109.46332)"
+             id="g841-2-8">
+            <circle
+               style="opacity:1;fill:#66ff00;fill-opacity:1;stroke-width:0.26458332"
+               id="path819-2-9"
+               cx="29.179792"
+               cy="181.83705"
+               r="46.869045" />
+            <circle
+               style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke-width:0.26458332"
+               id="path819-9-2-0"
+               cx="99.179199"
+               cy="181.83705"
+               r="46.869045" />
+            <circle
+               style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke-width:0.26458332"
+               id="path819-9-4-9-4"
+               cx="29.179792"
+               cy="244.08331"
+               r="46.869045" />
+            <circle
+               style="opacity:1;fill:#00ccff;fill-opacity:1;stroke-width:0.26458332"
+               id="path819-9-4-4-6-8"
+               cx="99.179199"
+               cy="244.08331"
+               r="46.869045" />
+          </g>
+          <text
+             id="text868-6-5"
+             y="139.65047"
+             x="-153.26526"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:103.29600525px;line-height:1.25;font-family:Quantify;-inkscape-font-specification:Quantify;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.58240056"
+             xml:space="preserve"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quantify;-inkscape-font-specification:Quantify;stroke-width:2.58240056"
+               y="139.65047"
+               x="-153.26526"
+               id="tspan866-5-1"
+               sodipodi:role="line">S2</tspan></text>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1020"
+       transform="translate(235.63033,178.40476)"
+       inkscape:export-xdpi="96.000023"
+       inkscape:export-ydpi="96.000023">
+      <rect
+         y="-326.68619"
+         x="-16.417582"
+         height="132.29167"
+         width="270.93332"
+         id="rect893-6"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37648946" />
+      <g
+         transform="translate(3.2075789,-3.519992e-6)"
+         id="g1004">
+        <g
+           id="g1450-5-2"
+           transform="matrix(0.4938616,0,0,0.4938616,158.9248,-301.96153)">
+          <rect
+             y="16.138714"
+             x="-306.29086"
+             height="135.46666"
+             width="135.46666"
+             id="rect1439-6-1"
+             style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:0.29067701" />
+          <g
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="C:\Users\7050426\Downloads\simon.png"
+             transform="matrix(0.82734052,0,0,0.82734052,-161.60676,-1.7551042)"
+             id="g874-5-2">
+            <g
+               id="g841-2-8-4"
+               transform="translate(-157.18929,-109.46332)">
+              <circle
+                 r="46.869045"
+                 cy="181.83705"
+                 cx="29.179792"
+                 id="path819-2-9-9"
+                 style="opacity:1;fill:#66ff00;fill-opacity:1;stroke-width:0.26458332" />
+              <circle
+                 r="46.869045"
+                 cy="181.83705"
+                 cx="99.179199"
+                 id="path819-9-2-0-5"
+                 style="opacity:1;fill:#ff2a2a;fill-opacity:1;stroke-width:0.26458332" />
+              <circle
+                 r="46.869045"
+                 cy="244.08331"
+                 cx="29.179792"
+                 id="path819-9-4-9-4-3"
+                 style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke-width:0.26458332" />
+              <circle
+                 r="46.869045"
+                 cy="244.08331"
+                 cx="99.179199"
+                 id="path819-9-4-4-6-8-8"
+                 style="opacity:1;fill:#00ccff;fill-opacity:1;stroke-width:0.26458332" />
+            </g>
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:103.29600525px;line-height:1.25;font-family:Quantify;-inkscape-font-specification:Quantify;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.58240056"
+               x="-153.26526"
+               y="139.65047"
+               id="text868-6-5-4"><tspan
+                 sodipodi:role="line"
+                 id="tspan866-5-1-1"
+                 x="-153.26526"
+                 y="139.65047"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quantify;-inkscape-font-specification:Quantify;stroke-width:2.58240056">S2</tspan></text>
+          </g>
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:39.75946045px;line-height:1.25;font-family:Quantify;-inkscape-font-specification:Quantify;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.99398661"
+           x="88.00824"
+           y="-246.62454"
+           id="text868-3"><tspan
+             sodipodi:role="line"
+             id="tspan866-1"
+             x="88.00824"
+             y="-246.62454"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quantify;-inkscape-font-specification:Quantify;fill:#ffffff;stroke-width:0.99398661">Simon 2</tspan></text>
+      </g>
     </g>
   </g>
 </svg>
