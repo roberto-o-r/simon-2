@@ -21,10 +21,10 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     // Load sounds.
-    _player1.load('sound-1.mp3');
-    _player2.load('sound-2.mp3');
-    _player3.load('sound-3.mp3');
-    _player4.load('sound-4.mp3');
+    _player1.load('green.mp3');
+    _player2.load('red.mp3');
+    _player3.load('yellow.mp3');
+    _player4.load('blue.mp3');
 
     _gameBloc.dispatch(StartGame());
 
@@ -190,22 +190,22 @@ class _GameScreenState extends State<GameScreen> {
   void _playSound(int number) {
     switch (number) {
       case 1:
-        _player1.play('sound-1.mp3');
+        _player1.play('green.mp3');
         break;
       case 2:
-        _player2.play('sound-2.mp3');
+        _player2.play('red.mp3');
         break;
       case 3:
-        _player3.play('sound-3.mp3');
+        _player3.play('yellow.mp3');
         break;
       case 4:
-        _player4.play('sound-4.mp3');
+        _player4.play('blue.mp3');
         break;
       default:
-        _player1.play('sound-1.mp3');
-        _player2.play('sound-2.mp3');
-        _player3.play('sound-3.mp3');
-        _player4.play('sound-4.mp3');
+        _player1.play('green.mp3');
+        _player2.play('red.mp3');
+        _player3.play('yellow.mp3');
+        _player4.play('blue.mp3');
     }
   }
 }
